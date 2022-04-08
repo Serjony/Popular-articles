@@ -1,0 +1,6 @@
+framework module Pods_Popular_articles {
+  umbrella header "Pods-Popular-articles-umbrella.h"
+
+  export *
+  module * { export * }
+}
