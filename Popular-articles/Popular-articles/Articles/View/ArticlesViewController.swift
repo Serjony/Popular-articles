@@ -13,12 +13,20 @@ protocol ArticlesView: AnyObject {
     
 }
 
-final class ArticlesViewController: UIViewController {
+final class ArticlesViewController: UIViewController, UITabBarDelegate {
     
     // MARK: - Public properties
     
     var presenter: ArticlesPresenting!
     var interactor: ArticlesInteracting!
+    let apiService = APIService()
+    
+    // MARK: - Public properties
+    @IBOutlet weak var tabBar: UITabBar!
+    @IBOutlet weak var mostViewed: UITabBarItem!
+    @IBOutlet weak var mostShared: UITabBarItem!
+    @IBOutlet weak var mostEmailed: UITabBarItem!
+    @IBOutlet weak var favorites: UITabBarItem!
     
     // MARK: - Object lifecycle
     
@@ -32,10 +40,21 @@ final class ArticlesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TODO: Ask the Presenter to do some work
-        
+        tabBar.delegate = self
         presenter.viewDidLoad()
         
+    }
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if item == mostViewed {
+            print("1")
+        } else if item == mostShared {
+            print("2")
+        } else if item == mostEmailed {
+            print("3")
+        } else {
+            print("4")
+        }
     }
 }
 

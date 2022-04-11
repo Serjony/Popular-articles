@@ -31,8 +31,8 @@ extension Articles {
 extension Articles.Presenter: ArticlesPresenting {
     
     func viewDidLoad() {
-
-        // TODO: Present something in view or call some method on interactor
+        
+        interactor.sendRequestForData()
 
         // router.navigateToSomewhere()
     }

@@ -15,9 +15,45 @@
                     <view key="view" contentMode="scaleToFill" id="JpY-z6-Ho7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bSu-iD-Tis">
+                                <rect key="frame" x="0.0" y="44" width="414" height="763"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9z-bd-NBD">
+                                <rect key="frame" x="0.0" y="807" width="414" height="55"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="fdQ-86-ZED"/>
+                                </constraints>
+                                <items>
+                                    <tabBarItem systemItem="mostViewed" id="Mti-8x-cIW"/>
+                                    <tabBarItem title="Most shared" image="arrowshape.turn.up.right.fill" catalog="system" id="MiC-Le-9av"/>
+                                    <tabBarItem title="Most emailed" image="tray.full.fill" catalog="system" id="Anx-X2-oZU"/>
+                                    <tabBarItem systemItem="favorites" id="Nkw-au-HTe"/>
+                                </items>
+                                <color key="barTintColor" systemColor="systemGray6Color"/>
+                            </tabBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="XSn-ck-TvG"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <constraints>
+                            <constraint firstItem="j9z-bd-NBD" firstAttribute="bottom" secondItem="XSn-ck-TvG" secondAttribute="bottom" id="JVQ-X0-Drn"/>
+                            <constraint firstItem="j9z-bd-NBD" firstAttribute="trailing" secondItem="XSn-ck-TvG" secondAttribute="trailing" id="MRb-vn-dxk"/>
+                            <constraint firstItem="bSu-iD-Tis" firstAttribute="leading" secondItem="XSn-ck-TvG" secondAttribute="leading" id="PtL-Xt-I3y"/>
+                            <constraint firstItem="j9z-bd-NBD" firstAttribute="leading" secondItem="XSn-ck-TvG" secondAttribute="leading" id="Z5r-2L-tiA"/>
+                            <constraint firstItem="j9z-bd-NBD" firstAttribute="top" secondItem="bSu-iD-Tis" secondAttribute="bottom" id="ZdU-a1-W2d"/>
+                            <constraint firstItem="bSu-iD-Tis" firstAttribute="top" secondItem="XSn-ck-TvG" secondAttribute="top" id="fTw-pW-8Ro"/>
+                            <constraint firstItem="XSn-ck-TvG" firstAttribute="trailing" secondItem="bSu-iD-Tis" secondAttribute="trailing" id="og5-WB-NhT"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="favorites" destination="Nkw-au-HTe" id="MqG-DO-WO7"/>
+                        <outlet property="mostEmailed" destination="Anx-X2-oZU" id="hsE-Xw-7Ej"/>
+                        <outlet property="mostShared" destination="MiC-Le-9av" id="MeC-DY-Fd8"/>
+                        <outlet property="mostViewed" destination="Mti-8x-cIW" id="3Mu-S3-pW6"/>
+                        <outlet property="tabBar" destination="j9z-bd-NBD" id="ENS-gq-X9x"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2r-wr-ibW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -25,6 +61,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>
+        <image name="tray.full.fill" catalog="system" width="128" height="88"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

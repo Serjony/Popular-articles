@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ArticlesInteracting: AnyObject {
-    
+    func sendRequestForData()
 }
 
 protocol ArticlesInteractorOutput: AnyObject {
@@ -29,6 +29,7 @@ extension Articles {
 
         private let api: ArticlesAPI
         private var entity: Entity!
+        private let repository = ArticlesRepository()
 
         // MARK: - Init
 
@@ -41,6 +42,10 @@ extension Articles {
 // MARK: - Business logic
 
 extension Articles.Interactor: ArticlesInteracting {
+    func sendRequestForData() {
+        repository.sendRequestAndGetData()
+    }
+    
 
     
 }

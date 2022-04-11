@@ -8,9 +8,22 @@
 import Foundation
 
 protocol ArticlesRepositoryProtocol {
-    
+    func sendRequestAndGetData()
 }
 
 final class ArticlesRepository: ArticlesRepositoryProtocol {
+    private let service = APIService()
+    
+    func sendRequestAndGetData() {
+        service.sendRequestAndGetData(urlString: "") { data, err in
+            for item in data {
+                if let item = item as? NSDictionary {
+                    print(item.allKeys)
+                    //TODO: create model
+                }
+            }
+        }
+    }
+    
     
 }
