@@ -8,9 +8,19 @@
 import Foundation
 
 protocol ArticlesLocalAPIProtocol {
-    
+    func addArticle(article: Article)
+    func getArticles() -> [Article]
 }
 
 final class ArticlesLocalAPI: ArticlesLocalAPIProtocol {
+    private var popularArticles: [Article] = []
+
+    func addArticle(article: Article) {
+        popularArticles.append(article)
+    }
+    
+    func getArticles() -> [Article] {
+        return popularArticles
+    }
     
 }

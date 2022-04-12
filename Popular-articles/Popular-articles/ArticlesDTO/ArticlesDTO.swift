@@ -6,17 +6,32 @@
 //
 
 import Foundation
+import UIKit
 
-struct ArticlesResponse: Codable {
-    let popularArticles: [Article]
-}
+//struct ArticlesResponse: Codable {
+//    let popularArticles: [Article]
+//}
 
-struct Article: Codable {
+//struct BaseResponse: Decodable {
+//    let results: Article
+//}
+
+//struct Article: Codable {
+//    let title: String
+//    let section: String
+//    let author: String
+//    let publishedDate: String
+//    let url: String
+//    let image: UIImage?
+    
+//}
+
+struct Article {
     let title: String
-    let description: String
+    let section: String
     let author: String
     let publishedDate: String
     let url: String
-    let imageUrl: String
-    
+    let image: UIImage?
+
 }

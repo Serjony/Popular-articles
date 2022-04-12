@@ -11,6 +11,8 @@
 		F53FE9892802FFAE001D0906 /* ArticlesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53FE9882802FFAE001D0906 /* ArticlesDTO.swift */; };
 		F53FE98F28040E8D001D0906 /* NYAlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53FE98E28040E8D001D0906 /* NYAlamofireManager.swift */; };
 		F53FE99328041497001D0906 /* api.nytimes.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F53FE99228041497001D0906 /* api.nytimes.com.cer */; };
+		F5761B252805CDE100B45897 /* MostPopularArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5761B232805CDE100B45897 /* MostPopularArticleCell.xib */; };
+		F5761B262805CDE100B45897 /* MostPopularArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5761B242805CDE100B45897 /* MostPopularArticleCell.swift */; };
 		F588E0E528001D4F00D220C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E0E428001D4F00D220C9 /* AppDelegate.swift */; };
 		F588E0E728001D4F00D220C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E0E628001D4F00D220C9 /* SceneDelegate.swift */; };
 		F588E0EF28001D4F00D220C9 /* Popular_articles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F588E0ED28001D4F00D220C9 /* Popular_articles.xcdatamodeld */; };
@@ -36,6 +38,8 @@
 		F53FE9882802FFAE001D0906 /* ArticlesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesDTO.swift; sourceTree = "<group>"; };
 		F53FE98E28040E8D001D0906 /* NYAlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYAlamofireManager.swift; sourceTree = "<group>"; };
 		F53FE99228041497001D0906 /* api.nytimes.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = api.nytimes.com.cer; sourceTree = "<group>"; };
+		F5761B232805CDE100B45897 /* MostPopularArticleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MostPopularArticleCell.xib; sourceTree = "<group>"; };
+		F5761B242805CDE100B45897 /* MostPopularArticleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MostPopularArticleCell.swift; sourceTree = "<group>"; };
 		F588E0E128001D4F00D220C9 /* Popular-articles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Popular-articles.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F588E0E428001D4F00D220C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F588E0E628001D4F00D220C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +104,15 @@
 				F53FE98E28040E8D001D0906 /* NYAlamofireManager.swift */,
 			);
 			path = Security;
+			sourceTree = "<group>";
+		};
+		F5761B222805CDC500B45897 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F5761B242805CDE100B45897 /* MostPopularArticleCell.swift */,
+				F5761B232805CDE100B45897 /* MostPopularArticleCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		F588E0D828001D4F00D220C9 = {
@@ -197,6 +210,7 @@
 		F588E123280033FF00D220C9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F5761B222805CDC500B45897 /* Cell */,
 				F588E124280033FF00D220C9 /* ArticlesViewController.swift */,
 			);
 			path = View;
@@ -296,6 +310,7 @@
 			files = (
 				F588E12E280033FF00D220C9 /* Articles.storyboard in Resources */,
 				F53FE99328041497001D0906 /* api.nytimes.com.cer in Resources */,
+				F5761B252805CDE100B45897 /* MostPopularArticleCell.xib in Resources */,
 				F588E0F428001D5100D220C9 /* LaunchScreen.storyboard in Resources */,
 				F588E0F128001D5100D220C9 /* Assets.xcassets in Resources */,
 			);
@@ -351,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F588E12D280033FF00D220C9 /* ArticlesViewController.swift in Sources */,
+				F5761B262805CDE100B45897 /* MostPopularArticleCell.swift in Sources */,
 				F588E128280033FF00D220C9 /* Articles.Presenter.swift in Sources */,
 				F588E12A280033FF00D220C9 /* Articles.Entity.swift in Sources */,
 				F588E129280033FF00D220C9 /* Articles.API.swift in Sources */,

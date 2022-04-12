@@ -53,6 +53,7 @@
                         <outlet property="mostShared" destination="MiC-Le-9av" id="MeC-DY-Fd8"/>
                         <outlet property="mostViewed" destination="Mti-8x-cIW" id="3Mu-S3-pW6"/>
                         <outlet property="tabBar" destination="j9z-bd-NBD" id="ENS-gq-X9x"/>
+                        <outlet property="tableView" destination="bSu-iD-Tis" id="V3J-6Z-npN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2r-wr-ibW" userLabel="First Responder" sceneMemberID="firstResponder"/>

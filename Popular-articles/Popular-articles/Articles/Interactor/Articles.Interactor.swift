@@ -10,6 +10,7 @@ import Foundation
 
 protocol ArticlesInteracting: AnyObject {
     func sendRequestForData()
+    func getViewModel() -> [Article]
 }
 
 protocol ArticlesInteractorOutput: AnyObject {
@@ -46,6 +47,8 @@ extension Articles.Interactor: ArticlesInteracting {
         repository.sendRequestAndGetData()
     }
     
-
+    func getViewModel() -> [Article] {
+        repository.getPopularArticles()
+    }
     
 }
