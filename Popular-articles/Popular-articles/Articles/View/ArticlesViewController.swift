@@ -13,6 +13,7 @@ enum News {
     case mostViewed
     case mostShared
     case mostEmailed
+    case favorites
 }
 
 final class ArticlesViewController: UIViewController, UITabBarDelegate {
@@ -26,6 +27,7 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     private var viewedModel: [Article] = []
     private var sharedModel: [Article] = []
     private var emailedModel: [Article] = []
+    private var favoriteModel: [Article] = []
 
     private let service = APIService()
     private var state: News = .mostViewed
@@ -51,9 +53,17 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
         
         tabBar.delegate = self
         tabBar.selectedItem = mostViewed
-        
-        self.setupTableViewSettings()
+        createGestureForTableView()
+        setupTableViewSettings()
         getDataForArticles(news: .mostViewed)
+    }
+    
+    @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        let touchPoint = longPressGestureRecognizer.location(in: tableView)
+        
+        if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+            self.showActionSheet(at: indexPath)
+        }
     }
     
     func setupTableViewSettings() {
@@ -89,8 +99,46 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
                 tableView.reloadData()
             }
         } else {
-            print("4")
+            state = .favorites
+            if favoriteModel.isEmpty {
+                getDataForArticles(news: .favorites)
+            } else {
+                tableView.reloadData()
+            }
         }
+    }
+    
+    func createGestureForTableView() {
+        let tapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
+        tableView.addGestureRecognizer(tapGesture)
+    }
+    
+    private func showActionSheet(at indexPath: IndexPath) {
+        if state != .favorites{
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            alertController.addAction(UIAlertAction(title: "Add to favorite", style: .default, handler: { (_) in
+                var model: Article
+                switch self.state {
+                case .mostViewed:
+                    model = self.viewedModel[indexPath.row]
+                case .mostShared:
+                    model = self.sharedModel[indexPath.row]
+                case .mostEmailed:
+                    model = self.emailedModel[indexPath.row]
+                default:
+                    model = self.viewedModel[indexPath.row]
+                }
+                
+                self.favoriteModel.append(model)
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in }))
+            
+            present(alertController, animated: true)
+
+        }
+        
     }
     
     private func getDataForArticles(news: News) {
@@ -105,6 +153,8 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
                     self.sharedModel = articles.results
                 case .mostEmailed:
                     self.emailedModel = articles.results
+                case .favorites:
+                    break
                 }
                 
                 self.tableView.reloadData()
@@ -124,7 +174,11 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
             article = sharedModel[indexPath.row]
         case .mostEmailed:
             article = emailedModel[indexPath.row]
+        case .favorites:
+            article = favoriteModel[indexPath.row]
         }
+        
+        //TODO: Create detail VC
         guard let url = URL(string: article.url) else {return}
         let vc = SFSafariViewController(url: url)
         present(vc, animated: true)
@@ -145,6 +199,8 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate {
             cell.configureCell(model: sharedModel[indexPath.row])
         case .mostEmailed:
             cell.configureCell(model: emailedModel[indexPath.row])
+        case .favorites:
+            cell.configureCell(model: favoriteModel[indexPath.row])
         }
         
         return cell
@@ -155,11 +211,17 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewedModel.count
+        if state == .favorites {
+            return favoriteModel.count
+
+        } else {
+            return viewedModel.count
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         openDetail(indexPath: indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
+    
 }

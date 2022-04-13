@@ -29,15 +29,20 @@ final class APIService: APIServiceProtocol {
             url = URL(string: mostShared)!
         case .mostEmailed:
             url = URL(string: mostEmailed)!
+        case .favorites:
+            url = URL(string: mostViewed)!
         }
         
-        AF.request(url)
-            .validate()
-            .responseDecodable(of: BaseResponse.self) { (response) in
-                guard let articles = response.value else {
-                    return completionHandler(.failure(.noConnection))
+        if news != .favorites{
+            AF.request(url)
+                .validate()
+                .responseDecodable(of: BaseResponse.self) { (response) in
+                    guard let articles = response.value else {
+                        return completionHandler(.failure(.noConnection))
+                    }
+                    completionHandler(.success(articles))
                 }
-                completionHandler(.success(articles))
-            }
+        }
+        
     }
 }
