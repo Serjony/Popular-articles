@@ -9,11 +9,6 @@
 import UIKit
 import SafariServices
 
-protocol ArticlesView: AnyObject {
-
-    
-}
-
 enum News {
     case mostViewed
     case mostShared
@@ -114,6 +109,7 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
                 
                 self.tableView.reloadData()
             case .failure(_):
+                self.tableView.isHidden = true
                 print("No internet connection")
             }
         }
@@ -137,7 +133,7 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
 
 // MARK: - View logic
 
-extension ArticlesViewController: ArticlesView, UITableViewDataSource, UITableViewDelegate {
+extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MostPopularArticleCell", for: indexPath) as! MostPopularArticleCell

@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		DF73CDA2FC381F708F4E062A /* Pods_Popular_articles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1490990E6727EF233A51A448 /* Pods_Popular_articles.framework */; };
 		F53FE9892802FFAE001D0906 /* ArticlesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53FE9882802FFAE001D0906 /* ArticlesDTO.swift */; };
-		F53FE98F28040E8D001D0906 /* NYAlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53FE98E28040E8D001D0906 /* NYAlamofireManager.swift */; };
-		F53FE99328041497001D0906 /* api.nytimes.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F53FE99228041497001D0906 /* api.nytimes.com.cer */; };
 		F5761B252805CDE100B45897 /* MostPopularArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5761B232805CDE100B45897 /* MostPopularArticleCell.xib */; };
 		F5761B262805CDE100B45897 /* MostPopularArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5761B242805CDE100B45897 /* MostPopularArticleCell.swift */; };
 		F588E0E528001D4F00D220C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E0E428001D4F00D220C9 /* AppDelegate.swift */; };
@@ -29,8 +27,6 @@
 		3792B675933A5465F0F14FA2 /* Pods-Popular-articles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Popular-articles.debug.xcconfig"; path = "Target Support Files/Pods-Popular-articles/Pods-Popular-articles.debug.xcconfig"; sourceTree = "<group>"; };
 		5389FA0864B4FC65A05D7091 /* Pods-Popular-articles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Popular-articles.release.xcconfig"; path = "Target Support Files/Pods-Popular-articles/Pods-Popular-articles.release.xcconfig"; sourceTree = "<group>"; };
 		F53FE9882802FFAE001D0906 /* ArticlesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesDTO.swift; sourceTree = "<group>"; };
-		F53FE98E28040E8D001D0906 /* NYAlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYAlamofireManager.swift; sourceTree = "<group>"; };
-		F53FE99228041497001D0906 /* api.nytimes.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = api.nytimes.com.cer; sourceTree = "<group>"; };
 		F5761B232805CDE100B45897 /* MostPopularArticleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MostPopularArticleCell.xib; sourceTree = "<group>"; };
 		F5761B242805CDE100B45897 /* MostPopularArticleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MostPopularArticleCell.swift; sourceTree = "<group>"; };
 		F588E0E128001D4F00D220C9 /* Popular-articles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Popular-articles.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,15 +79,6 @@
 			path = ArticlesDTO;
 			sourceTree = "<group>";
 		};
-		F53FE990280412C3001D0906 /* Security */ = {
-			isa = PBXGroup;
-			children = (
-				F53FE99228041497001D0906 /* api.nytimes.com.cer */,
-				F53FE98E28040E8D001D0906 /* NYAlamofireManager.swift */,
-			);
-			path = Security;
-			sourceTree = "<group>";
-		};
 		F5761B222805CDC500B45897 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,7 +109,6 @@
 		F588E0E328001D4F00D220C9 /* Popular-articles */ = {
 			isa = PBXGroup;
 			children = (
-				F53FE990280412C3001D0906 /* Security */,
 				F53FE9872802FF5E001D0906 /* ArticlesDTO */,
 				F588E131280035CF00D220C9 /* ArticlesLocalAPI */,
 				F588E1302800353400D220C9 /* APIService */,
@@ -240,7 +226,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F588E12E280033FF00D220C9 /* Articles.storyboard in Resources */,
-				F53FE99328041497001D0906 /* api.nytimes.com.cer in Resources */,
 				F5761B252805CDE100B45897 /* MostPopularArticleCell.xib in Resources */,
 				F588E0F428001D5100D220C9 /* LaunchScreen.storyboard in Resources */,
 				F588E0F128001D5100D220C9 /* Assets.xcassets in Resources */,
@@ -298,7 +283,6 @@
 			files = (
 				F588E12D280033FF00D220C9 /* ArticlesViewController.swift in Sources */,
 				F5761B262805CDE100B45897 /* MostPopularArticleCell.swift in Sources */,
-				F53FE98F28040E8D001D0906 /* NYAlamofireManager.swift in Sources */,
 				F53FE9892802FFAE001D0906 /* ArticlesDTO.swift in Sources */,
 				F588E0E528001D4F00D220C9 /* AppDelegate.swift in Sources */,
 				F588E0EF28001D4F00D220C9 /* Popular_articles.xcdatamodeld in Sources */,
