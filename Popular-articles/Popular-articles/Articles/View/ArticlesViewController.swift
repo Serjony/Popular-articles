@@ -31,12 +31,12 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     private var state: News = .mostViewed
     
     // MARK: - Public properties
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tabBar: UITabBar!
-    @IBOutlet weak var mostViewed: UITabBarItem!
-    @IBOutlet weak var mostShared: UITabBarItem!
-    @IBOutlet weak var mostEmailed: UITabBarItem!
-    @IBOutlet weak var favorites: UITabBarItem!
+    @IBOutlet weak private var tableView: UITableView!
+    @IBOutlet weak private var tabBar: UITabBar!
+    @IBOutlet weak private var mostViewed: UITabBarItem!
+    @IBOutlet weak private var mostShared: UITabBarItem!
+    @IBOutlet weak private var mostEmailed: UITabBarItem!
+    @IBOutlet weak private var favorites: UITabBarItem!
     
     // MARK: - Object lifecycle
     

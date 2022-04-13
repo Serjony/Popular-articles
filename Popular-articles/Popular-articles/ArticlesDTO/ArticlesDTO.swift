@@ -34,18 +34,18 @@ struct Article: Decodable {
     }
 }
 
-struct ImageURL: Decodable {
-    var url: String
-    
-    enum CodingKeys: String, CodingKey {
-        case url
-    }
-}
-
 struct Media: Decodable {
     var media: [ImageURL]
     
     enum CodingKeys: String, CodingKey {
         case media = "media-metadata"
+    }
+}
+
+struct ImageURL: Decodable {
+    var url: String
+    
+    enum CodingKeys: String, CodingKey {
+        case url
     }
 }

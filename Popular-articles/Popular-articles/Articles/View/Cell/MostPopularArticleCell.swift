@@ -11,11 +11,12 @@ import Kingfisher
 
 class MostPopularArticleCell: UITableViewCell {
     
-    @IBOutlet weak var imageIcon: UIImageView!
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblByLine: UILabel!
-    @IBOutlet weak var lblSection: UILabel!
-    @IBOutlet weak var lblPublishedDate: UILabel!
+    @IBOutlet weak private var imageIcon: UIImageView!
+    @IBOutlet weak private var lblTitle: UILabel!
+    @IBOutlet weak private var lblByLine: UILabel!
+    @IBOutlet weak private var lblSection: UILabel!
+    @IBOutlet weak private var lblPublishedDate: UILabel!
+    
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -26,6 +27,15 @@ class MostPopularArticleCell: UITableViewCell {
         
         imageIcon.clipsToBounds = true;
         imageIcon.backgroundColor = .orange
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        lblTitle.text = ""
+        lblByLine.text = ""
+        lblPublishedDate.text = ""
+        lblSection.text = ""
+        imageIcon.image = nil
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
