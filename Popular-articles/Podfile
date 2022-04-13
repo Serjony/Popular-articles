@@ -6,6 +6,6 @@ target 'Popular-articles' do
   use_frameworks!
 
   # Pods for Popular-articles
-  pod 'Alamofire', '~> 4.8'
+  pod 'Alamofire', '~> 5.4.3'
 
 end

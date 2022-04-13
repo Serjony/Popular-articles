@@ -9,20 +9,20 @@ import Alamofire
 
 public struct NYAlamofireManager {
     
-    public static let shared: SessionManager = {
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 1000
-        
-        let serverTrustPolicies: [String: ServerTrustPolicy] = [
-            "api.nytimes.com": .pinCertificates(
-                certificates: Certificates.apiNYTimes,
-                validateCertificateChain: true,
-                validateHost: true
-            )
-        ]
-        let sessionManager = Alamofire.SessionManager(configuration: configuration, delegate: SessionDelegate(), serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies))
-        return sessionManager
-    }()
+//    public static let shared: SessionManager = {
+//        let configuration = URLSessionConfiguration.default
+//        configuration.timeoutIntervalForRequest = 1000
+//        
+//        let serverTrustPolicies: [String: ServerTrustPolicy] = [
+//            "api.nytimes.com": .pinCertificates(
+//                certificates: Certificates.apiNYTimes,
+//                validateCertificateChain: true,
+//                validateHost: true
+//            )
+//        ]
+//        let sessionManager = Alamofire.SessionManager(configuration: configuration, delegate: SessionDelegate(), serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies))
+//        return sessionManager
+//    }()
 }
 
 struct Certificates {
