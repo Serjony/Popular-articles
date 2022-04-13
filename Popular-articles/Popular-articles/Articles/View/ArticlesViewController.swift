@@ -7,20 +7,33 @@
 //
 
 import UIKit
+import SafariServices
 
 protocol ArticlesView: AnyObject {
 
     
 }
 
+enum News {
+    case mostViewed
+    case mostShared
+    case mostEmailed
+}
+
 final class ArticlesViewController: UIViewController, UITabBarDelegate {
     
     // MARK: - Public properties
     
-    var presenter: ArticlesPresenting!
-    var interactor: ArticlesInteracting!
     let apiService = APIService()
-    var viewModel: [Article] = []
+    
+    // MARK: - Private properties
+    
+    private var viewedModel: [Article] = []
+    private var sharedModel: [Article] = []
+    private var emailedModel: [Article] = []
+
+    private let service = APIService()
+    private var state: News = .mostViewed
     
     // MARK: - Public properties
     @IBOutlet weak var tableView: UITableView!
@@ -34,7 +47,6 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        Articles.Module().configure(viewController: self)
     }
     
     // MARK: - View lifecycle
@@ -43,17 +55,10 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
         super.viewDidLoad()
         
         tabBar.delegate = self
-        presenter.viewDidLoad()
+        tabBar.selectedItem = mostViewed
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.getViewModels()
-            self.setupTableViewSettings()
-        }
-        
-    }
-    
-    func getViewModels() {
-        self.viewModel = interactor.getViewModel()
+        self.setupTableViewSettings()
+        getDataForArticles(news: .mostViewed)
     }
     
     func setupTableViewSettings() {
@@ -67,14 +72,66 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if item == mostViewed {
-            print("1")
+            state = .mostViewed
+            if viewedModel.isEmpty {
+                getDataForArticles(news: .mostViewed)
+            } else {
+                tableView.reloadData()
+            }
         } else if item == mostShared {
-            print("2")
+            state = .mostShared
+            if sharedModel.isEmpty {
+                getDataForArticles(news: .mostShared)
+            } else {
+                tableView.reloadData()
+            }
+
         } else if item == mostEmailed {
-            print("3")
+            state = .mostEmailed
+            if emailedModel.isEmpty {
+                getDataForArticles(news: .mostEmailed)
+            } else {
+                tableView.reloadData()
+            }
         } else {
             print("4")
         }
+    }
+    
+    private func getDataForArticles(news: News) {
+        service.sendRequestAndGetData(news: news) { data in
+            
+            switch data {
+            case .success(let articles):
+                switch news {
+                case .mostViewed:
+                    self.viewedModel = articles.results
+                case .mostShared:
+                    self.sharedModel = articles.results
+                case .mostEmailed:
+                    self.emailedModel = articles.results
+                }
+                
+                self.tableView.reloadData()
+            case .failure(_):
+                print("No internet connection")
+            }
+        }
+    }
+    
+    private func openDetail(indexPath: IndexPath) {
+        var article: Article
+        switch state {
+        case .mostViewed:
+            article = viewedModel[indexPath.row]
+        case .mostShared:
+            article = sharedModel[indexPath.row]
+        case .mostEmailed:
+            article = emailedModel[indexPath.row]
+        }
+        guard let url = URL(string: article.url) else {return}
+        let vc = SFSafariViewController(url: url)
+        present(vc, animated: true)
     }
 }
 
@@ -84,7 +141,16 @@ extension ArticlesViewController: ArticlesView, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MostPopularArticleCell", for: indexPath) as! MostPopularArticleCell
-        cell.configureCell(model: viewModel[indexPath.row])
+        
+        switch state {
+        case .mostViewed:
+            cell.configureCell(model: viewedModel[indexPath.row])
+        case .mostShared:
+            cell.configureCell(model: sharedModel[indexPath.row])
+        case .mostEmailed:
+            cell.configureCell(model: emailedModel[indexPath.row])
+        }
+        
         return cell
     }
     
@@ -93,14 +159,11 @@ extension ArticlesViewController: ArticlesView, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.count
+        return viewedModel.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        selectedArticle = viewModel.articleForIndex(index: indexPath.row)
-//        performSegue(withIdentifier: detailsSegueId, sender: nil)
-        
-        //взять юрл из модели и открыть сафари
+        openDetail(indexPath: indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }

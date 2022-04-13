@@ -9,20 +9,20 @@ import Foundation
 import UIKit
 
 struct BaseResponse: Decodable {
-    var results: [TestArticle]
+    var results: [Article]
     
     enum CodingKeys: String, CodingKey {
         case results = "results"
     }
 }
 
-struct TestArticle: Decodable {
+struct Article: Decodable {
     let title: String
     let section: String
     let author: String
     let publishedDate: String
     let url: String
-    let image: [ImageURL]?
+    let image: [Media]?
     
     enum CodingKeys: String, CodingKey {
         case title
@@ -30,24 +30,22 @@ struct TestArticle: Decodable {
         case author = "byline"
         case publishedDate = "published_date"
         case url
-        case image = "media-metadata"
+        case image = "media"
     }
 }
 
 struct ImageURL: Decodable {
-    var url: String?
+    var url: String
     
     enum CodingKeys: String, CodingKey {
-        case url = "url"
+        case url
     }
 }
 
-struct Article {
-    let title: String
-    let section: String
-    let author: String
-    let publishedDate: String
-    let url: String
-    let image: UIImage?
-
+struct Media: Decodable {
+    var media: [ImageURL]
+    
+    enum CodingKeys: String, CodingKey {
+        case media = "media-metadata"
+    }
 }

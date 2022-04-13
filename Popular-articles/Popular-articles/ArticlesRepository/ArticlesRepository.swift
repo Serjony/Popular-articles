@@ -8,35 +8,39 @@
 import Foundation
 
 protocol ArticlesRepositoryProtocol {
-    func sendRequestAndGetData()
-    func getPopularArticles() -> [Article]
+//    func sendRequestAndGetData(completionHandler: @escaping (Result<BaseResponse, FetchingError>) -> Void)
+//    func getPopularArticles() -> [Article]
 }
 
 final class ArticlesRepository: ArticlesRepositoryProtocol {
-    private let service = APIService()
-    private let localAPI = ArticlesLocalAPI()
-    func sendRequestAndGetData() {
-        service.sendRequestAndGetData() { data in
-            
-            switch data {
-            case .success(let baseResp):
-                print("Yes")
-                for item in baseResp.results {
-                    print(item.image)
-                }
-            case .failure(_):
-                print("No")
-            }
-        }
-    }
-    
-    func getImageURL(array: NSArray) -> String {
-        return ""
-    }
-    
-    func getPopularArticles() -> [Article] {
-        return localAPI.getArticles()
-    }
+//    func sendRequestAndGetData(completionHandler: @escaping (Result<BaseResponse, FetchingError>) -> Void) {
+//        <#code#>
+//    }
+//    
+//    private let service = APIService()
+//    private let localAPI = ArticlesLocalAPI()
+//    func sendRequestAndGetData() {
+//        service.sendRequestAndGetData() { data in
+//            
+//            switch data {
+//            case .success(let baseResp):
+//                print("Yes")
+//                for item in baseResp.results {
+//                    print(item.image)
+//                }
+//            case .failure(_):
+//                print("No")
+//            }
+//        }
+//    }
+//    
+//    func getImageURL(array: NSArray) -> String {
+//        return ""
+//    }
+//    
+//    func getPopularArticles() -> [Article] {
+//        return localAPI.getArticles()
+//    }
     
     
 }

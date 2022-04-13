@@ -18,17 +18,10 @@
 		F588E0EF28001D4F00D220C9 /* Popular_articles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F588E0ED28001D4F00D220C9 /* Popular_articles.xcdatamodeld */; };
 		F588E0F128001D5100D220C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F588E0F028001D5100D220C9 /* Assets.xcassets */; };
 		F588E0F428001D5100D220C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F588E0F228001D5100D220C9 /* LaunchScreen.storyboard */; };
-		F588E127280033FF00D220C9 /* Articles.Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E119280033FF00D220C9 /* Articles.Module.swift */; };
-		F588E128280033FF00D220C9 /* Articles.Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E11B280033FF00D220C9 /* Articles.Presenter.swift */; };
-		F588E129280033FF00D220C9 /* Articles.API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E11D280033FF00D220C9 /* Articles.API.swift */; };
-		F588E12A280033FF00D220C9 /* Articles.Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E11E280033FF00D220C9 /* Articles.Entity.swift */; };
-		F588E12B280033FF00D220C9 /* Articles.Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E120280033FF00D220C9 /* Articles.Interactor.swift */; };
-		F588E12C280033FF00D220C9 /* Articles.Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E122280033FF00D220C9 /* Articles.Router.swift */; };
 		F588E12D280033FF00D220C9 /* ArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E124280033FF00D220C9 /* ArticlesViewController.swift */; };
 		F588E12E280033FF00D220C9 /* Articles.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F588E126280033FF00D220C9 /* Articles.storyboard */; };
 		F588E1332800368200D220C9 /* ArticlesLocalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E1322800368200D220C9 /* ArticlesLocalAPI.swift */; };
 		F588E135280036B900D220C9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E134280036B900D220C9 /* APIService.swift */; };
-		F588E137280036EC00D220C9 /* ArticlesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E136280036EB00D220C9 /* ArticlesRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,17 +40,10 @@
 		F588E0F028001D5100D220C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F588E0F328001D5100D220C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F588E0F528001D5100D220C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F588E119280033FF00D220C9 /* Articles.Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Articles.Module.swift; sourceTree = "<group>"; };
-		F588E11B280033FF00D220C9 /* Articles.Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Articles.Presenter.swift; sourceTree = "<group>"; };
-		F588E11D280033FF00D220C9 /* Articles.API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Articles.API.swift; sourceTree = "<group>"; };
-		F588E11E280033FF00D220C9 /* Articles.Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Articles.Entity.swift; sourceTree = "<group>"; };
-		F588E120280033FF00D220C9 /* Articles.Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Articles.Interactor.swift; sourceTree = "<group>"; };
-		F588E122280033FF00D220C9 /* Articles.Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Articles.Router.swift; sourceTree = "<group>"; };
 		F588E124280033FF00D220C9 /* ArticlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
 		F588E126280033FF00D220C9 /* Articles.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Articles.storyboard; sourceTree = "<group>"; };
 		F588E1322800368200D220C9 /* ArticlesLocalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesLocalAPI.swift; sourceTree = "<group>"; };
 		F588E134280036B900D220C9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		F588E136280036EB00D220C9 /* ArticlesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +126,6 @@
 				F53FE9872802FF5E001D0906 /* ArticlesDTO */,
 				F588E131280035CF00D220C9 /* ArticlesLocalAPI */,
 				F588E1302800353400D220C9 /* APIService */,
-				F588E12F2800352400D220C9 /* ArticlesRepository */,
 				F588E109280033B600D220C9 /* Articles */,
 				F588E0E428001D4F00D220C9 /* AppDelegate.swift */,
 				F588E0E628001D4F00D220C9 /* SceneDelegate.swift */,
@@ -155,56 +140,10 @@
 		F588E109280033B600D220C9 /* Articles */ = {
 			isa = PBXGroup;
 			children = (
-				F588E11F280033FF00D220C9 /* Interactor */,
-				F588E11C280033FF00D220C9 /* Model */,
-				F588E118280033FF00D220C9 /* Module */,
-				F588E11A280033FF00D220C9 /* Presenter */,
-				F588E121280033FF00D220C9 /* Router */,
 				F588E125280033FF00D220C9 /* Storyboard */,
 				F588E123280033FF00D220C9 /* View */,
 			);
 			path = Articles;
-			sourceTree = "<group>";
-		};
-		F588E118280033FF00D220C9 /* Module */ = {
-			isa = PBXGroup;
-			children = (
-				F588E119280033FF00D220C9 /* Articles.Module.swift */,
-			);
-			path = Module;
-			sourceTree = "<group>";
-		};
-		F588E11A280033FF00D220C9 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				F588E11B280033FF00D220C9 /* Articles.Presenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		F588E11C280033FF00D220C9 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				F588E11D280033FF00D220C9 /* Articles.API.swift */,
-				F588E11E280033FF00D220C9 /* Articles.Entity.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		F588E11F280033FF00D220C9 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				F588E120280033FF00D220C9 /* Articles.Interactor.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		F588E121280033FF00D220C9 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				F588E122280033FF00D220C9 /* Articles.Router.swift */,
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		F588E123280033FF00D220C9 /* View */ = {
@@ -222,14 +161,6 @@
 				F588E126280033FF00D220C9 /* Articles.storyboard */,
 			);
 			path = Storyboard;
-			sourceTree = "<group>";
-		};
-		F588E12F2800352400D220C9 /* ArticlesRepository */ = {
-			isa = PBXGroup;
-			children = (
-				F588E136280036EB00D220C9 /* ArticlesRepository.swift */,
-			);
-			path = ArticlesRepository;
 			sourceTree = "<group>";
 		};
 		F588E1302800353400D220C9 /* APIService */ = {
@@ -367,20 +298,13 @@
 			files = (
 				F588E12D280033FF00D220C9 /* ArticlesViewController.swift in Sources */,
 				F5761B262805CDE100B45897 /* MostPopularArticleCell.swift in Sources */,
-				F588E128280033FF00D220C9 /* Articles.Presenter.swift in Sources */,
-				F588E12A280033FF00D220C9 /* Articles.Entity.swift in Sources */,
-				F588E129280033FF00D220C9 /* Articles.API.swift in Sources */,
 				F53FE98F28040E8D001D0906 /* NYAlamofireManager.swift in Sources */,
 				F53FE9892802FFAE001D0906 /* ArticlesDTO.swift in Sources */,
 				F588E0E528001D4F00D220C9 /* AppDelegate.swift in Sources */,
 				F588E0EF28001D4F00D220C9 /* Popular_articles.xcdatamodeld in Sources */,
-				F588E12B280033FF00D220C9 /* Articles.Interactor.swift in Sources */,
 				F588E0E728001D4F00D220C9 /* SceneDelegate.swift in Sources */,
 				F588E135280036B900D220C9 /* APIService.swift in Sources */,
-				F588E137280036EC00D220C9 /* ArticlesRepository.swift in Sources */,
 				F588E1332800368200D220C9 /* ArticlesLocalAPI.swift in Sources */,
-				F588E12C280033FF00D220C9 /* Articles.Router.swift in Sources */,
-				F588E127280033FF00D220C9 /* Articles.Module.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
