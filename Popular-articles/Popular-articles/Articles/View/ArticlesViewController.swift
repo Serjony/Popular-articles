@@ -33,6 +33,7 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     private var state: News = .mostViewed
     
     // MARK: - Public properties
+    @IBOutlet weak private var emptyLabel: UILabel!
     @IBOutlet weak private var tableView: UITableView!
     @IBOutlet weak private var tabBar: UITabBar!
     @IBOutlet weak private var mostViewed: UITabBarItem!
@@ -53,6 +54,7 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
         
         tabBar.delegate = self
         tabBar.selectedItem = mostViewed
+        emptyLabel.isHidden = true
         createGestureForTableView()
         setupTableViewSettings()
         getDataForArticles(news: .mostViewed)
@@ -76,6 +78,8 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        emptyLabel.isHidden = true
+        tableView.isHidden = false
         if item == mostViewed {
             state = .mostViewed
             if viewedModel.isEmpty {
@@ -101,7 +105,13 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
         } else {
             state = .favorites
             if favoriteModel.isEmpty {
-                getDataForArticles(news: .favorites)
+                
+                //TODO: get data from CoreData
+//                getDataForArticles(news: .favorites)
+                
+                emptyLabel.isHidden = false
+                self.emptyLabel.text = "Empty"
+                tableView.isHidden = true
             } else {
                 tableView.reloadData()
             }
@@ -146,6 +156,8 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
             
             switch data {
             case .success(let articles):
+                self.emptyLabel.isHidden = true
+                self.tableView.isHidden = false
                 switch news {
                 case .mostViewed:
                     self.viewedModel = articles.results
@@ -159,6 +171,8 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
                 
                 self.tableView.reloadData()
             case .failure(_):
+                self.emptyLabel.isHidden = false
+                self.emptyLabel.text = "No connection"
                 self.tableView.isHidden = true
                 print("No internet connection")
             }

@@ -16,6 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No connection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVj-Bx-XoE">
+                                <rect key="frame" x="151.5" y="437.5" width="111" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bSu-iD-Tis">
                                 <rect key="frame" x="0.0" y="44" width="414" height="763"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -43,11 +49,14 @@
                             <constraint firstItem="bSu-iD-Tis" firstAttribute="leading" secondItem="XSn-ck-TvG" secondAttribute="leading" id="PtL-Xt-I3y"/>
                             <constraint firstItem="j9z-bd-NBD" firstAttribute="leading" secondItem="XSn-ck-TvG" secondAttribute="leading" id="Z5r-2L-tiA"/>
                             <constraint firstItem="j9z-bd-NBD" firstAttribute="top" secondItem="bSu-iD-Tis" secondAttribute="bottom" id="ZdU-a1-W2d"/>
+                            <constraint firstItem="OVj-Bx-XoE" firstAttribute="centerX" secondItem="JpY-z6-Ho7" secondAttribute="centerX" id="eLZ-NE-dho"/>
+                            <constraint firstItem="OVj-Bx-XoE" firstAttribute="centerY" secondItem="JpY-z6-Ho7" secondAttribute="centerY" id="f9n-YI-NEX"/>
                             <constraint firstItem="bSu-iD-Tis" firstAttribute="top" secondItem="XSn-ck-TvG" secondAttribute="top" id="fTw-pW-8Ro"/>
                             <constraint firstItem="XSn-ck-TvG" firstAttribute="trailing" secondItem="bSu-iD-Tis" secondAttribute="trailing" id="og5-WB-NhT"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emptyLabel" destination="OVj-Bx-XoE" id="EVm-Pv-WYD"/>
                         <outlet property="favorites" destination="Nkw-au-HTe" id="MqG-DO-WO7"/>
                         <outlet property="mostEmailed" destination="Anx-X2-oZU" id="hsE-Xw-7Ej"/>
                         <outlet property="mostShared" destination="MiC-Le-9av" id="MeC-DY-Fd8"/>

@@ -29,7 +29,7 @@ final class APIService: APIServiceProtocol {
             url = URL(string: mostShared)!
         case .mostEmailed:
             url = URL(string: mostEmailed)!
-        case .favorites:
+        default:
             url = URL(string: mostViewed)!
         }
         
