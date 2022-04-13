@@ -22,7 +22,7 @@ struct Article: Decodable {
     let author: String
     let publishedDate: String
     let url: String
-    let image: [Media]?
+    let image: [Media]
     
     enum CodingKeys: String, CodingKey {
         case title

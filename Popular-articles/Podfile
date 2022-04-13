@@ -7,5 +7,6 @@ target 'Popular-articles' do
 
   # Pods for Popular-articles
   pod 'Alamofire', '~> 5.4.3'
+  pod 'Kingfisher', '6.3.1'
 
 end
