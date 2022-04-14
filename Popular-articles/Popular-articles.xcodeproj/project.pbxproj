@@ -20,6 +20,8 @@
 		F588E12E280033FF00D220C9 /* Articles.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F588E126280033FF00D220C9 /* Articles.storyboard */; };
 		F588E1332800368200D220C9 /* ArticlesLocalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E1322800368200D220C9 /* ArticlesLocalAPI.swift */; };
 		F588E135280036B900D220C9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E134280036B900D220C9 /* APIService.swift */; };
+		F5894EBA28080F5300181013 /* ArticleEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5894EB828080F5300181013 /* ArticleEntity+CoreDataClass.swift */; };
+		F5894EBB28080F5300181013 /* ArticleEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5894EB928080F5300181013 /* ArticleEntity+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		F588E126280033FF00D220C9 /* Articles.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Articles.storyboard; sourceTree = "<group>"; };
 		F588E1322800368200D220C9 /* ArticlesLocalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesLocalAPI.swift; sourceTree = "<group>"; };
 		F588E134280036B900D220C9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		F5894EB828080F5300181013 /* ArticleEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArticleEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		F5894EB928080F5300181013 /* ArticleEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArticleEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +164,8 @@
 		F588E131280035CF00D220C9 /* ArticlesLocalAPI */ = {
 			isa = PBXGroup;
 			children = (
+				F5894EB828080F5300181013 /* ArticleEntity+CoreDataClass.swift */,
+				F5894EB928080F5300181013 /* ArticleEntity+CoreDataProperties.swift */,
 				F588E1322800368200D220C9 /* ArticlesLocalAPI.swift */,
 			);
 			path = ArticlesLocalAPI;
@@ -285,10 +291,12 @@
 				F5761B262805CDE100B45897 /* MostPopularArticleCell.swift in Sources */,
 				F53FE9892802FFAE001D0906 /* ArticlesDTO.swift in Sources */,
 				F588E0E528001D4F00D220C9 /* AppDelegate.swift in Sources */,
+				F5894EBA28080F5300181013 /* ArticleEntity+CoreDataClass.swift in Sources */,
 				F588E0EF28001D4F00D220C9 /* Popular_articles.xcdatamodeld in Sources */,
 				F588E0E728001D4F00D220C9 /* SceneDelegate.swift in Sources */,
 				F588E135280036B900D220C9 /* APIService.swift in Sources */,
 				F588E1332800368200D220C9 /* ArticlesLocalAPI.swift in Sources */,
+				F5894EBB28080F5300181013 /* ArticleEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

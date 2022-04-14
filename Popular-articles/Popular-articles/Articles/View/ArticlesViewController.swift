@@ -27,10 +27,11 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     private var viewedModel: [Article] = []
     private var sharedModel: [Article] = []
     private var emailedModel: [Article] = []
-    private var favoriteModel: [Article] = []
+    private var favoriteModel: [ArticleEntity] = []
 
     private let service = APIService()
     private var state: News = .mostViewed
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // MARK: - Public properties
     @IBOutlet weak private var emptyLabel: UILabel!
@@ -58,6 +59,7 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
         createGestureForTableView()
         setupTableViewSettings()
         getDataForArticles(news: .mostViewed)
+        getModelsFromLocalEntity()
     }
     
     @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
@@ -105,14 +107,11 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
         } else {
             state = .favorites
             if favoriteModel.isEmpty {
-                
-                //TODO: get data from CoreData
-//                getDataForArticles(news: .favorites)
-                
                 emptyLabel.isHidden = false
                 self.emptyLabel.text = "Empty"
                 tableView.isHidden = true
             } else {
+                getModelsFromLocalEntity()
                 tableView.reloadData()
             }
         }
@@ -140,7 +139,8 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
                     model = self.viewedModel[indexPath.row]
                 }
                 
-                self.favoriteModel.append(model)
+                self.saveToLocalEntity(model: model)
+                
             }))
             
             alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in }))
@@ -149,6 +149,36 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
 
         }
         
+    }
+    
+    private func getModelsFromLocalEntity() {
+        do {
+            favoriteModel = try context.fetch(ArticleEntity.fetchRequest())
+        } catch {
+            print("Entity get error")
+        }
+    }
+    
+    private func saveToLocalEntity(model: Article) {
+        let localModel = ArticleEntity(context: self.context)
+        localModel.title = model.title
+        localModel.section = model.section
+        localModel.author = model.author
+        localModel.publishedDate = model.publishedDate
+        localModel.url = model.url
+        
+        if model.image.isEmpty{
+            print("Empty")
+            localModel.mediaURL = ""
+        } else {
+            localModel.mediaURL = model.image[0].media[0].url
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            print("Core data save error")
+        }
     }
     
     private func getDataForArticles(news: News) {
@@ -180,20 +210,27 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     }
     
     private func openDetail(indexPath: IndexPath) {
+        let localArticle: ArticleEntity
         var article: Article
+        var url: URL?
+        
         switch state {
         case .mostViewed:
             article = viewedModel[indexPath.row]
+            url = URL(string: article.url)
         case .mostShared:
             article = sharedModel[indexPath.row]
+            url = URL(string: article.url)
         case .mostEmailed:
             article = emailedModel[indexPath.row]
+            url = URL(string: article.url)
         case .favorites:
-            article = favoriteModel[indexPath.row]
+            localArticle = favoriteModel[indexPath.row]
+            url = URL(string: localArticle.url!)
         }
         
         //TODO: Create detail VC
-        guard let url = URL(string: article.url) else {return}
+        guard let url = url else {return}
         let vc = SFSafariViewController(url: url)
         present(vc, animated: true)
     }
