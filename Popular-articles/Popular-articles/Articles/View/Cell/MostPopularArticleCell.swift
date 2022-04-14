@@ -17,15 +17,10 @@ class MostPopularArticleCell: UITableViewCell {
     @IBOutlet weak private var lblSection: UILabel!
     @IBOutlet weak private var lblPublishedDate: UILabel!
     
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        imageIcon.clipsToBounds = true;
+        imageIcon.clipsToBounds = true
         imageIcon.backgroundColor = .orange
     }
     
@@ -47,7 +42,7 @@ class MostPopularArticleCell: UITableViewCell {
         lblByLine.text = model.author
         lblPublishedDate.text = model.publishedDate
         lblSection.text = model.section
-        if model.image.isEmpty{
+        if model.image.isEmpty {
             print("Empty")
             imageIcon.image = UIImage(named: "NY")
         } else {

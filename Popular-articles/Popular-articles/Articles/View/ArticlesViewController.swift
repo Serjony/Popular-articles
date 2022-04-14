@@ -18,10 +18,6 @@ enum News {
 
 final class ArticlesViewController: UIViewController, UITabBarDelegate {
     
-    // MARK: - Public properties
-    
-    let apiService = APIService()
-    
     // MARK: - Private properties
     
     private var viewedModel: [Article] = []
@@ -41,12 +37,6 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     @IBOutlet weak private var mostShared: UITabBarItem!
     @IBOutlet weak private var mostEmailed: UITabBarItem!
     @IBOutlet weak private var favorites: UITabBarItem!
-    
-    // MARK: - Object lifecycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
     // MARK: - View lifecycle
     
@@ -117,7 +107,7 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
         }
     }
     
-    func createGestureForTableView() {
+    private func createGestureForTableView() {
         let tapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
         tableView.addGestureRecognizer(tapGesture)
     }
@@ -213,7 +203,6 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
         let localArticle: ArticleEntity
         var article: Article
         var url: URL?
-        
         switch state {
         case .mostViewed:
             article = viewedModel[indexPath.row]
@@ -236,7 +225,7 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     }
 }
 
-// MARK: - View logic
+// MARK: - TableView
 
 extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate {
     

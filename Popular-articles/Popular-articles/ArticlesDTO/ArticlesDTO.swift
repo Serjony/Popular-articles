@@ -5,7 +5,6 @@
 //  Created by Sergey Balabuts on 10.04.2022.
 //
 
-import Foundation
 import UIKit
 
 struct BaseResponse: Decodable {
