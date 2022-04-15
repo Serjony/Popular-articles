@@ -16,17 +16,26 @@ enum News {
     case favorites
 }
 
+struct ViewModel {
+    let title: String
+    let section: String
+    let author: String
+    let publishedDate: String
+    let url: String
+    let imageUrl: String
+}
+
 final class ArticlesViewController: UIViewController, UITabBarDelegate {
     
     // MARK: - Private properties
     
-    private var viewedModel: [Article] = []
-    private var sharedModel: [Article] = []
-    private var emailedModel: [Article] = []
-    private var favoriteModel: [ArticleEntity] = []
-
-    private let service = APIService()
+    private var viewedModel: [ViewModel] = []
+    private var sharedModel: [ViewModel] = []
+    private var emailedModel: [ViewModel] = []
+    private var favoriteModel: [ViewModel] = []
+    
     private var state: News = .mostViewed
+    private let service = APIService()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // MARK: - Public properties
@@ -58,15 +67,6 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
         if let indexPath = tableView.indexPathForRow(at: touchPoint) {
             self.showActionSheet(at: indexPath)
         }
-    }
-    
-    func setupTableViewSettings() {
-        self.tableView.register(UINib(nibName: "MostPopularArticleCell", bundle: nil), forCellReuseIdentifier: "MostPopularArticleCell")
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100
-        tableView.dataSource = self
-        tableView.delegate = self
     }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -107,6 +107,15 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
         }
     }
     
+    private func setupTableViewSettings() {
+        self.tableView.register(UINib(nibName: "MostPopularArticleCell", bundle: nil), forCellReuseIdentifier: "MostPopularArticleCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+    
     private func createGestureForTableView() {
         let tapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
         tableView.addGestureRecognizer(tapGesture)
@@ -117,7 +126,7 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
             alertController.addAction(UIAlertAction(title: "Add to favorite", style: .default, handler: { (_) in
-                var model: Article
+                var model: ViewModel
                 switch self.state {
                 case .mostViewed:
                     model = self.viewedModel[indexPath.row]
@@ -143,26 +152,31 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     
     private func getModelsFromLocalEntity() {
         do {
-            favoriteModel = try context.fetch(ArticleEntity.fetchRequest())
+            //TODO: check map error
+            let entityModels = try context.fetch(ArticleEntity.fetchRequest())
+            entityModels.forEach { item in
+                let model = ViewModel(title: item.title!,
+                                      section: item.section!,
+                                      author: item.author!,
+                                      publishedDate: item.publishedDate!,
+                                      url: item.url!,
+                                      imageUrl: item.mediaURL!)
+                
+                favoriteModel.append(model)
+            }
         } catch {
             print("Entity get error")
         }
     }
     
-    private func saveToLocalEntity(model: Article) {
+    private func saveToLocalEntity(model: ViewModel) {
         let localModel = ArticleEntity(context: self.context)
         localModel.title = model.title
         localModel.section = model.section
         localModel.author = model.author
         localModel.publishedDate = model.publishedDate
         localModel.url = model.url
-        
-        if model.image.isEmpty{
-            print("Empty")
-            localModel.mediaURL = ""
-        } else {
-            localModel.mediaURL = model.image[0].media[0].url
-        }
+        localModel.mediaURL = model.imageUrl
         
         do {
             try context.save()
@@ -178,13 +192,14 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
             case .success(let articles):
                 self.emptyLabel.isHidden = true
                 self.tableView.isHidden = false
+                let viewModel = self.convertArticleToViewModel(article: articles.results)
                 switch news {
                 case .mostViewed:
-                    self.viewedModel = articles.results
+                    self.viewedModel = viewModel
                 case .mostShared:
-                    self.sharedModel = articles.results
+                    self.sharedModel = viewModel
                 case .mostEmailed:
-                    self.emailedModel = articles.results
+                    self.emailedModel = viewModel
                 case .favorites:
                     break
                 }
@@ -199,9 +214,30 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
         }
     }
     
+    private func convertArticleToViewModel(article: [Article]) -> [ViewModel] {
+        var models: [ViewModel] = []
+        for item in article {
+            let imageUrl: String
+            if item.image.isEmpty {
+                imageUrl = ""
+            } else {
+                imageUrl = item.image[0].media[0].url
+            }
+            let model = ViewModel(title: item.title,
+                                  section: item.section,
+                                  author: item.author,
+                                  publishedDate: item.publishedDate,
+                                  url: item.url,
+                                  imageUrl: imageUrl)
+            models.append(model)
+        }
+        
+        return models
+    }
+    
     private func openDetail(indexPath: IndexPath) {
-        let localArticle: ArticleEntity
-        var article: Article
+        let localArticle: ViewModel
+        var article: ViewModel
         var url: URL?
         switch state {
         case .mostViewed:
@@ -215,7 +251,7 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
             url = URL(string: article.url)
         case .favorites:
             localArticle = favoriteModel[indexPath.row]
-            url = URL(string: localArticle.url!)
+            url = URL(string: localArticle.url)
         }
         
         //TODO: Create detail VC

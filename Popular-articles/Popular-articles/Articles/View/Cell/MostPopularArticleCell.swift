@@ -37,29 +37,15 @@ class MostPopularArticleCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configureCell(model: Article) {
+    func configureCell(model: ViewModel) {
         lblTitle.text = model.title
         lblByLine.text = model.author
         lblPublishedDate.text = model.publishedDate
         lblSection.text = model.section
-        if model.image.isEmpty {
-            print("Empty")
+        if model.imageUrl == "" {
             imageIcon.image = UIImage(named: "NY")
         } else {
-            getImage(data: (model.image[0].media[0].url))
-        }
-    }
-    
-    func configureCell(model: ArticleEntity) {
-        lblTitle.text = model.title
-        lblByLine.text = model.author
-        lblPublishedDate.text = model.publishedDate
-        lblSection.text = model.section
-        if model.mediaURL == "" {
-            print("Empty")
-            imageIcon.image = UIImage(named: "NY")
-        } else {
-            getImage(data: model.mediaURL!)
+            getImage(data: model.imageUrl)
         }
     }
     
