@@ -28,15 +28,11 @@ struct ViewModel {
 final class ArticlesViewController: UIViewController, UITabBarDelegate {
     
     // MARK: - Private properties
-    
-    private var viewedModel: [ViewModel] = []
-    private var sharedModel: [ViewModel] = []
-    private var emailedModel: [ViewModel] = []
-    private var favoriteModel: [ViewModel] = []
-    
+
     private var state: News = .mostViewed
     private let service = APIService()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let localAPI = ArticlesLocalAPI()
     
     // MARK: - Public properties
     @IBOutlet weak private var emptyLabel: UILabel!
@@ -74,14 +70,14 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
         tableView.isHidden = false
         if item == mostViewed {
             state = .mostViewed
-            if viewedModel.isEmpty {
+            if localAPI.getArticles(state: .mostViewed).isEmpty {
                 getDataForArticles(news: .mostViewed)
             } else {
                 tableView.reloadData()
             }
         } else if item == mostShared {
             state = .mostShared
-            if sharedModel.isEmpty {
+            if localAPI.getArticles(state: .mostShared).isEmpty {
                 getDataForArticles(news: .mostShared)
             } else {
                 tableView.reloadData()
@@ -89,14 +85,14 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
 
         } else if item == mostEmailed {
             state = .mostEmailed
-            if emailedModel.isEmpty {
+            if localAPI.getArticles(state: .mostEmailed).isEmpty {
                 getDataForArticles(news: .mostEmailed)
             } else {
                 tableView.reloadData()
             }
         } else {
             state = .favorites
-            if favoriteModel.isEmpty {
+            if localAPI.getArticles(state: .favorites).isEmpty {
                 emptyLabel.isHidden = false
                 self.emptyLabel.text = "Empty"
                 tableView.isHidden = true
@@ -122,20 +118,20 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     }
     
     private func showActionSheet(at indexPath: IndexPath) {
-        if state != .favorites{
+        if state != .favorites {
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
             alertController.addAction(UIAlertAction(title: "Add to favorite", style: .default, handler: { (_) in
                 var model: ViewModel
                 switch self.state {
                 case .mostViewed:
-                    model = self.viewedModel[indexPath.row]
+                    model = self.localAPI.getArticles(state: .mostViewed)[indexPath.row]
                 case .mostShared:
-                    model = self.sharedModel[indexPath.row]
+                    model = self.localAPI.getArticles(state: .mostShared)[indexPath.row]
                 case .mostEmailed:
-                    model = self.emailedModel[indexPath.row]
+                    model = self.localAPI.getArticles(state: .mostEmailed)[indexPath.row]
                 default:
-                    model = self.viewedModel[indexPath.row]
+                    model = self.localAPI.getArticles(state: .mostViewed)[indexPath.row]
                 }
                 
                 self.saveToLocalEntity(model: model)
@@ -153,6 +149,7 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     private func getModelsFromLocalEntity() {
         do {
             //TODO: check map error
+            var viewModels: [ViewModel] = []
             let entityModels = try context.fetch(ArticleEntity.fetchRequest())
             entityModels.forEach { item in
                 let model = ViewModel(title: item.title!,
@@ -162,7 +159,8 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
                                       url: item.url!,
                                       imageUrl: item.mediaURL!)
                 
-                favoriteModel.append(model)
+                viewModels.append(model)
+                localAPI.addArticles(articles: viewModels, state: .favorites)
             }
         } catch {
             print("Entity get error")
@@ -195,11 +193,11 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
                 let viewModel = self.convertArticleToViewModel(article: articles.results)
                 switch news {
                 case .mostViewed:
-                    self.viewedModel = viewModel
+                    self.localAPI.addArticles(articles: viewModel, state: .mostViewed)
                 case .mostShared:
-                    self.sharedModel = viewModel
+                    self.localAPI.addArticles(articles: viewModel, state: .mostShared)
                 case .mostEmailed:
-                    self.emailedModel = viewModel
+                    self.localAPI.addArticles(articles: viewModel, state: .mostEmailed)
                 case .favorites:
                     break
                 }
@@ -236,22 +234,21 @@ final class ArticlesViewController: UIViewController, UITabBarDelegate {
     }
     
     private func openDetail(indexPath: IndexPath) {
-        let localArticle: ViewModel
         var article: ViewModel
         var url: URL?
         switch state {
         case .mostViewed:
-            article = viewedModel[indexPath.row]
+            article = localAPI.getArticles(state: .mostViewed)[indexPath.row]
             url = URL(string: article.url)
         case .mostShared:
-            article = sharedModel[indexPath.row]
+            article = localAPI.getArticles(state: .mostShared)[indexPath.row]
             url = URL(string: article.url)
         case .mostEmailed:
-            article = emailedModel[indexPath.row]
+            article = localAPI.getArticles(state: .mostEmailed)[indexPath.row]
             url = URL(string: article.url)
         case .favorites:
-            localArticle = favoriteModel[indexPath.row]
-            url = URL(string: localArticle.url)
+            article = localAPI.getArticles(state: .favorites)[indexPath.row]
+            url = URL(string: article.url)
         }
         
         //TODO: Create detail VC
@@ -270,13 +267,13 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate {
         
         switch state {
         case .mostViewed:
-            cell.configureCell(model: viewedModel[indexPath.row])
+            cell.configureCell(model: localAPI.getArticles(state: .mostViewed)[indexPath.row])
         case .mostShared:
-            cell.configureCell(model: sharedModel[indexPath.row])
+            cell.configureCell(model: localAPI.getArticles(state: .mostShared)[indexPath.row])
         case .mostEmailed:
-            cell.configureCell(model: emailedModel[indexPath.row])
+            cell.configureCell(model: localAPI.getArticles(state: .mostEmailed)[indexPath.row])
         case .favorites:
-            cell.configureCell(model: favoriteModel[indexPath.row])
+            cell.configureCell(model: localAPI.getArticles(state: .favorites)[indexPath.row])
         }
         
         return cell
@@ -288,10 +285,10 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if state == .favorites {
-            return favoriteModel.count
+            return localAPI.getArticles(state: .favorites).count
 
         } else {
-            return viewedModel.count
+            return localAPI.getArticles(state: .mostViewed).count
         }
     }
     

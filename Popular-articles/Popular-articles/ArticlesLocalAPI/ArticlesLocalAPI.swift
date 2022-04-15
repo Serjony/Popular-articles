@@ -7,20 +7,36 @@
 
 import Foundation
 
-protocol ArticlesLocalAPIProtocol {
-    func addArticle(article: Article)
-    func getArticles() -> [Article]
-}
-
-final class ArticlesLocalAPI: ArticlesLocalAPIProtocol {
-    private var popularArticles: [Article] = []
-
-    func addArticle(article: Article) {
-        popularArticles.append(article)
+final class ArticlesLocalAPI {
+    
+    private var viewedModel: [ViewModel] = []
+    private var sharedModel: [ViewModel] = []
+    private var emailedModel: [ViewModel] = []
+    private var favoriteModel: [ViewModel] = []
+    
+    func addArticles(articles: [ViewModel], state: News) {
+        switch state {
+        case .mostViewed:
+            viewedModel = articles
+        case .mostShared:
+            sharedModel = articles
+        case .mostEmailed:
+            emailedModel = articles
+        case .favorites:
+            favoriteModel = articles
+        }
     }
     
-    func getArticles() -> [Article] {
-        return popularArticles
+    func getArticles(state: News) -> [ViewModel] {
+        switch state {
+        case .mostViewed:
+            return viewedModel
+        case .mostShared:
+            return sharedModel
+        case .mostEmailed:
+            return emailedModel
+        case .favorites:
+            return favoriteModel
+        }
     }
-    
 }
